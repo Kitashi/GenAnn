@@ -43,13 +43,10 @@ class Track:
     #          x[2] is location
     # Returns: WHERE qualifier of a MySQL query requesting at least one of multiple locations
     def makePositionCheck(self, args):
-        result = ''
+        result = []
         for x in args:
-            if (result):
-                result = result + ' OR '
-            result = result + self.__makeSinglePositionCheck(x[0],x[1],x[2])
-        
-        return result
+            result.append(self.__makeSinglePositionCheck(x[0],x[1],x[2]))
+        return ' OR '.join(result)
 
     # Args:
     #  chr: chromosome number (form: "chrX" where "X" is the chromosome number)
@@ -74,26 +71,16 @@ class Track:
     #          x[3] is end location
     # Returns: WHERE qualifier of a MySQL query requesting at least one of multiple ranges
     def makeRangeCheck(self, args):
-        result = ''
+        result = []
         for x in args:
-            if (result):
-                result = result + ' OR '
-            result = result + self.__makeSingleRangeCheck(x[0],x[1],x[2],x[3])
-        
-        return result
+            result.append(self.__makeSingleRangeCheck(x[0],x[1],x[2],x[3]))
+        return ' OR '.join(result)
 
     # Args:
     #  args: Array of WHERE qualifiers
     # Returns: each array element concatenated into one string with " OR " between them
     def orWheres(self, args):
-        result = ''
-        i = 1
-        while i <= len(args):
-            if (result):
-                result = result + ' OR '
-            result = result + args[i-1]
-            i = i + 1
-        return result
+        return ' OR '.join(args)
 
     # Args:
     #  sql_check: WHERE qualifier
