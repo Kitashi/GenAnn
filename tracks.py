@@ -77,10 +77,10 @@ class Track:
         return ' OR '.join(result)
 
     def findNearestRightPos(self, chr, strand, pos):
-        return pos + ' <= ' + __col_start + ' ORDER BY ABS(' + __col_start + ' - ' + pos + ') ASC LIMIT 1'
+        return pos + ' <= ' + self.__col_start + ' ORDER BY ABS(' + self.__col_start + ' - ' + pos + ') ASC LIMIT 1'
         
     def findNearestLeftPos(self, chr, strand, pos):
-        return pos + ' >= ' + __col_end + ' ORDER BY ABS(' + pos + ' - ' + __col_end + ') ASC LIMIT 1'
+        return pos + ' >= ' + self.__col_end + ' ORDER BY ABS(' + pos + ' - ' + self.__col_end + ') ASC LIMIT 1'
 
     # Args:
     #  args: Array of WHERE qualifiers
