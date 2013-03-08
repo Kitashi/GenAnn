@@ -76,9 +76,19 @@ class Track:
             result.append(self.__makeSingleRangeCheck(x[0],x[1],x[2],x[3]))
         return ' OR '.join(result)
 
+    # Args:
+    #  chr: Chromosome number string (formatted: "chrX" where X is the chromosome number")
+    #  strand: the chromosome strand (+ or -)
+    #  pos: Location on the chromosome (int)
+    # Returns: WHERE qualifier of a MySQL query requesting nearest feature start to the right of the given position
     def findNearestRightPos(self, chr, strand, pos):
         return pos + ' <= ' + self.__col_start + ' ORDER BY ABS(' + self.__col_start + ' - ' + pos + ') ASC LIMIT 1'
         
+    # Args:
+    #  chr: Chromosome number string (formatted: "chrX" where X is the chromosome number")
+    #  strand: the chromosome strand (+ or -)
+    #  pos: Location on the chromosome (int)
+    # Returns: WHERE qualifier of a MySQL query requesting nearest feature end to the left of the given position
     def findNearestLeftPos(self, chr, strand, pos):
         return pos + ' >= ' + self.__col_end + ' ORDER BY ABS(' + pos + ' - ' + self.__col_end + ') ASC LIMIT 1'
 
