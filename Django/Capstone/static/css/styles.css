@@ -1,0 +1,22 @@
+﻿body {
+    padding-left:2em;
+    padding-bottom:2em;
+}
+
+.resulttbl {
+    margin-top:2em;
+    padding:4px;
+    border:1px solid black;
+}
+
+.resulttbl th {
+    color:white;
+    background-color:gray;
+    border-bottom:1px solid black;
+    padding:0 1em;
+}
+
+.resulttbl tr td {
+    text-align:center;
+    padding:5px;
+}
