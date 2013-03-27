@@ -1,5 +1,8 @@
 import MySQLdb
 
+# The desired columns from the table
+cols = '*'
+
 # Owner: Matt
 # Args:
 #  snp: 'rsX' where X is a string of digits
@@ -10,7 +13,7 @@ import MySQLdb
 def snpToLocations(snp, sql_connection, table_name):
     cur = sql_connection.cursor()
     snp_where = 'name = "' + snp + '"'
-    query = 'select chrom, chromStart, chromEnd from ' + table_name + ' where ' + snp_where + ';'
+    query = 'select ' + cols + ' from ' + table_name + ' where ' + snp_where + ';'
     cur.execute(query)
     return cur.fetchall()
     
@@ -24,6 +27,6 @@ def snpsToLocations(snp_array, sql_connection, table_name):
     cur = sql_connection.cursor()
     middle = '" OR name = "'
     snp_where = middle.join(snp_array)
-    query = 'select chrom, chromStart, chromEnd from ' + table_name + ' where name = "' + snp_where + '";'
+    query = 'select ' + cols + ' from ' + table_name + ' where name = "' + snp_where + '";'
     cur.execute(query)
     return cur.fetchall()

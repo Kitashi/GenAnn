@@ -101,5 +101,10 @@ class Track:
     # Args:
     #  sql_check: WHERE qualifier
     # Returns: MySQL Query on this table with given WHERE qualifier
-    def makeQuery(self, sql_check):
-        return 'SELECT ' + self.__want + ' FROM ' + self.__name + ' WHERE ' + sql_check + ';'
+    def makeQuery(self, sql_check, out_file=None):
+        pre = 'SELECT ' + self.__want
+        post = ' FROM ' + self.__name + ' WHERE ' + sql_check + ';'
+        mid = ''
+        if out_file:
+            mid = ' INTO OUTFILE ' + out_file
+        return pre + mid + post
